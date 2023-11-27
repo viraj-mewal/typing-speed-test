@@ -1,7 +1,7 @@
 from tkinter import *
-import time
 import threading
 import random
+import time
 
 '''`
 Formulas :-
@@ -68,6 +68,32 @@ class changeWindow:
 
         return l
 
+class InfoWindow:
+    def __init__(self):
+        self.win = Tk()
+        self.win.title("INFO")
+        self.win.iconbitmap("icon.ico")
+        self.win.resizable(False, False)
+        self.win.configure(bg="black")
+        self.draw()
+        self.win.mainloop()
+
+    def draw(self):
+        self.projectName = Label(self.win, text="PROJECT NAME :- ", font=("Helvetica",20), bg="black", fg="white")
+        self.projectName.grid(row=0, column=0, padx=20, pady=20)
+        
+        self.devName = Label(self.win, text="DEVELOPER :- ", font=("Helvetica",20), bg="black", fg="white")
+        self.devName.grid(row=1, column=0, padx=20, pady=20)
+        
+        self.projectName1 = Label(self.win, text="Typing Speed Test", font=("Georgia",20), bg="black", fg="gold")
+        self.projectName1.grid(row=0, column=1, padx=20, pady=20)
+        
+        self.devName1 = Label(self.win, text="Aman Meena", font=("Georgia",20), bg="black", fg="aqua")
+        self.devName1.grid(row=1, column=1, padx=20, pady=20)
+        
+        
+        
+
 class Window:
     def __init__(self, yeah):
         self.yeah = yeah
@@ -85,8 +111,8 @@ class Window:
         self.win = Tk()
         self.win.title("Typing Speed Test")
         self.win.configure(bg='black')
-        self.win.iconbitmap('icon.ico')
         self.win.resizable(False, False)
+        self.win.iconbitmap('icon.ico')
         self.draw()
         if self.yeah:
             self.custom_reset()
@@ -94,16 +120,16 @@ class Window:
 
     def draw(self):
         self.sentence = Label(self.win, text=self.choice, fg='white', bg='black', font=self.font)
-        self.sentence.grid(row=0, column=0, columnspan=2, padx=20, pady=20)
+        self.sentence.grid(row=0, column=0, columnspan=3, padx=20, pady=20)
 
         self.entry_var = StringVar()
         self.entry = Entry(self.win, textvariable=self.entry_var, font=self.font, fg='black', bg='white', width=50)
-        self.entry.grid(row=1, column=0, columnspan=2, padx=20, pady=20)
+        self.entry.grid(row=1, column=0, columnspan=3, padx=20, pady=20)
         self.entry.bind('<KeyRelease>', self.event)
         self.win.bind('<KeyRelease>', self.check)
 
         self.stats = Label(self.win, text="WPM - 00\nACCURACY - 00\nERRORS - 00", fg='white', bg='black', font=self.font)
-        self.stats.grid(row=2, column=0, columnspan=2, padx=20, pady=20)
+        self.stats.grid(row=2, column=0, columnspan=3, padx=20, pady=20)
 
         self.reset_btn = Button(self.win, text="Reset", font=("Comic Sans MS",30), bg='gold', fg='red', command=self.reset)
         self.reset_btn.grid(row=3, column=0, padx=20, pady=20)
@@ -111,10 +137,16 @@ class Window:
         self.change_btn = Button(self.win, text="Change", font=("Comic Sans MS",30), bg='aqua', fg='red', command=self.change)
         self.change_btn.grid(row=3, column=1, padx=20, pady=20)
 
+        self.info_btn = Button(self.win, text="Info", font=("Comic Sans MS",30), bg='aqua', fg='red', command=self.info)
+        self.info_btn.grid(row=3, column=2, padx=20, pady=20)
+        
     def check(self, event):
         if event.keycode == 9:
             self.reset()
             self.entry.focus()
+        
+    def info(self):
+        InfoWindow()
 
     def event(self, event):
         if event.keycode == 9:
